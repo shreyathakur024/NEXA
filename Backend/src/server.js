@@ -23,7 +23,7 @@ const httpServer= createServer(app);
 
 const PORT=process.env.PORT || 5004
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174", "https://nexa-bysk.vercel.app"];
 export const io = new Server(httpServer,{
     cors:{
         origin: (origin, callback) => {
@@ -97,7 +97,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(uploadsDir));
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://nexa-bysk.vercel.app"], 
   credentials: true,
   exposedHeaders: ["X-Auth-Token"],
 }));
