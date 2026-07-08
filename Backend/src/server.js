@@ -97,7 +97,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(uploadsDir));
 app.use(cors({
-  origin: "*", 
+  origin: "https://nexa-bysk.vercel.app", 
   credentials: true,
   exposedHeaders: ["X-Auth-Token"],
 }));
