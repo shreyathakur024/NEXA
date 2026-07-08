@@ -92,15 +92,15 @@ socket.on("iceCandidate", (data) => {
 
 });
 
+app.get('/', (req, res)=>{
+  res.send("Welcome")
+})
+
 // middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(uploadsDir));
-app.use(cors({
-  origin: "https://nexa-bysk.vercel.app", 
-  credentials: true,
-  exposedHeaders: ["X-Auth-Token"],
-}));
+app.use(cors());
 app.use("/api/auth",authRouter)
 app.use("/api/messages",messageRoutes);
 
