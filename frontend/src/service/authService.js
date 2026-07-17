@@ -6,7 +6,7 @@ export const loginUser = async (credentials) => {
     // Token is automatically stored by interceptor
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error.response?.data || { message: error.message || "Network Error" };
   }
 };
 
@@ -18,7 +18,7 @@ export const signupUser = async (userData) => {
     // Token is automatically stored by interceptor
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error.response?.data || { message: error.message || "Network Error" };
   }
 };
 
@@ -27,7 +27,7 @@ export const checkAuthUser = async () => {
     const response = await axiosInstance.get('/auth/me');
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error.response?.data || { message: error.message || "Network Error" };
   }
 };
 
@@ -38,7 +38,7 @@ export const logoutUser = async()=>{
         localStorage.removeItem("authToken");
         return response.data;
     } catch (error) {
-        throw error.response.data;
+        throw error.response?.data || { message: error.message || "Network Error" };
     }
 };
 

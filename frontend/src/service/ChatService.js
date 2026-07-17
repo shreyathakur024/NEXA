@@ -5,7 +5,7 @@ export const getMessages = async (userId) => {
     const response = await axiosInstance.get(`/messages/${userId}`);
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error.response?.data || { message: error.message || "Network Error" };
   }
 };
 
@@ -14,6 +14,6 @@ export const sendMessage = async (userId, formData) => {
     const response = await axiosInstance.post(`/messages/send/${userId}`, formData);
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error.response?.data || { message: error.message || "Network Error" };
   }
 };

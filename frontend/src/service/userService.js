@@ -5,7 +5,7 @@ export const updateProfile = async (formData) => {
         const response = await axiosInstance.put('/auth/update-profile', formData);
         return response.data;
     } catch (error) {
-        throw error.response.data;
+        throw error.response?.data || { message: error.message || "Network Error" };
     }
 }
 
@@ -14,6 +14,6 @@ export const getProfile = async () => {
     const response = await axiosInstance.get('/user/get-profile');
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error.response?.data || { message: error.message || "Network Error" };
   }
 };
