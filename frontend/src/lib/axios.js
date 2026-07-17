@@ -1,6 +1,16 @@
 import axios from "axios";
 
-const apiBaseUrl = import.meta.env.VITE_API_URL || "https://nexa-hj2s.onrender.com/api";
+let apiBaseUrl = import.meta.env.VITE_API_URL || "https://nexa-hj2s.onrender.com/api";
+
+// Ensure baseURL ends with /api
+if (apiBaseUrl) {
+    const trimmed = apiBaseUrl.replace(/\/+$/, "");
+    if (!trimmed.endsWith("/api")) {
+        apiBaseUrl = `${trimmed}/api`;
+    } else {
+        apiBaseUrl = trimmed;
+    }
+}
 
 export const axiosInstance = axios.create({
     baseURL: apiBaseUrl,

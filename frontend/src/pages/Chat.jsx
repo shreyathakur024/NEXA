@@ -42,8 +42,21 @@ const Chat = () => {
   const getImageUrl = (value) => {
     if (!value) return "";
     if (/^https?:\/\//i.test(value)) return value;
-    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5004";
-    return `${baseUrl}/${String(value).replace(/^\/+/, "")}`;
+    
+    let apiBaseUrl = import.meta.env.VITE_API_URL || "https://nexa-hj2s.onrender.com/api";
+    // Ensure baseURL ends with /api
+    if (apiBaseUrl) {
+        const trimmed = apiBaseUrl.replace(/\/+$/, "");
+        if (!trimmed.endsWith("/api")) {
+            apiBaseUrl = `${trimmed}/api`;
+        } else {
+            apiBaseUrl = trimmed;
+        }
+    }
+    
+    // Static uploads are served from the root domain of the backend (remove /api)
+    const backendRoot = apiBaseUrl.replace(/\/api\/?$/, "");
+    return `${backendRoot}/${String(value).replace(/^\/+/, "")}`;
   };
 
   useEffect(() => {
